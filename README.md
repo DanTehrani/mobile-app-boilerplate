@@ -3,7 +3,6 @@
 ## ✅ Out of the box
 
 - Push Notifications
-- In-app purchases
 - Authentication
 - Over-the-air updates
 - Postgres integration
@@ -11,6 +10,7 @@
 - Basic UI components
 - Basic onboarding flow
 - End-to-end type safety (tRPC + Prisma)
+- In-app purchases (coming soon)
 
 ## 📙 Tutorial
 

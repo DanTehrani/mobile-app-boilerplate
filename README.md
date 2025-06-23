@@ -2,6 +2,9 @@
 
 Boilerplate to ship mobile apps fast.
 
+DM https://x.com/dan_tehrani for questions and feedback.
+
+
 ## ✅ Out of the box
 
 - Push Notifications

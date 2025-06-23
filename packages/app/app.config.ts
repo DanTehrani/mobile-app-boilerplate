@@ -120,6 +120,7 @@ const config: ExpoConfig = {
           'Allow Boilerplate to use your location.',
       },
     ],
+    'expo-iap',
   ],
   extra: {
     eas: {

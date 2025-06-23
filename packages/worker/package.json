@@ -1,0 +1,29 @@
+{
+  "name": "@boilerplate/worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./out/index.js",
+  "types": "out/index.d.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "dotenv -e ../../.env -- tsx ./src/index",
+    "start:watch": "dotenv -e ../../.env -- tsx --watch ./src/index",
+    "build": "tsc -d",
+    "build:watch": "tsc -d --watch",
+    "lint": "eslint . & tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@boilerplate/db": "workspace:*",
+    "@sentry/cli": "^2.32.1",
+    "@sentry/node": "^8.47.0",
+    "@types/node": "^20.11.17",
+    "axios": "^1.7.2",
+    "expo-server-sdk": "^3.15.0",
+    "uuid": "^11.0.5",
+    "winston": "^3.17.0"
+  }
+}

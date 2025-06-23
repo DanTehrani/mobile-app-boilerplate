@@ -1,0 +1,71 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - packages/shared/**
+      - packages/api/**
+      - packages/app/**
+      - packages/db/**
+      - .github/workflows/**
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Cache turbo build setup
+        uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57
+        with: 
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2
+        with:
+          version: 9.0.4
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af
+        with:
+          node-version: 24.2.0
+          cache: 'pnpm'
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@c7b66a9c327a43a8fa7c0158e7f30d6040d2481e
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Remove unnecessary packages
+        run: rm -rf ./packages/{scripts}
+
+      - name: Install dependencies
+        run: pnpm i --ignore-scripts
+
+      - name: Build
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Create a .env file
+        run: printf "EXPO_PUBLIC_RPC_URL=https://boilerplate-api.onrender.com" > .env
+        working-directory: packages/app
+
+      - name: 🚀 Create update
+        run: eas update --auto --branch production
+        working-directory: packages/app
+        env:
+          APP_VARIANT: production

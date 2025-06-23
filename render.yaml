@@ -1,0 +1,47 @@
+previews:
+  generation: automatic
+
+services:
+  - type: web
+    name: boilerplate-api
+    plan: starter
+    runtime: node
+    region: oregon
+    buildCommand: rm -rf ./packages/{app,worker,scripts} && pnpm i --ignore-scripts && pnpm build
+    preDeployCommand: pnpm -F db migrate:prod
+    startCommand: NODE_ENV=production pnpm -F api start
+    autoDeploy: true
+    envVars:
+      - fromGroup: boilerplate
+      - key: NODE_VERSION
+        value: 24.2.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: boilerplate
+          property: connectionString
+
+  - type: worker
+    name: boilerplate-worker
+    plan: starter
+    runtime: node
+    region: oregon
+    buildCommand: rm -rf ./packages/{app,scripts} && pnpm i --ignore-scripts && pnpm build
+    startCommand: NODE_ENV=production pnpm -F worker start
+    autoDeploy: true
+    envVars:
+      - fromGroup: boilerplate
+      - key: NODE_VERSION
+        value: 24.2.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: boilerplate
+          property: connectionString
+
+databases:
+  - name: boilerplate
+    databaseName: boilerplate
+    region: oregon
+    plan: basic-256mb
+    previewPlan: basic-256mb
+    postgresMajorVersion: 16
+

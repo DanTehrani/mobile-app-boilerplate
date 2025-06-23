@@ -1,0 +1,44 @@
+{
+  "name": "@boilerplate/api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./out/index.js",
+  "types": "out/index.d.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "dotenv -e ../../.env -- tsx ./src/index",
+    "start:watch": "dotenv -e ../../.env -- tsx --watch ./src/index",
+    "build": "tsc -d",
+    "build:watch": "tsc -d --watch",
+    "lint": "eslint . & tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@boilerplate/db": "workspace:*",
+    "@sentry/cli": "^2.32.1",
+    "@sentry/node": "^8.47.0",
+    "@trpc/server": "^11.0.0-rc.439",
+    "@types/node": "^20.11.17",
+    "axios": "^1.7.2",
+    "firebase": "^11.7.3",
+    "firebase-admin": "^13.4.0",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^148.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "node-cache": "^5.1.2",
+    "openai": "^4.98.0",
+    "sharp": "^0.34.1",
+    "tsx": "^4.7.1",
+    "winston": "^3.17.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/ws": "^8.18.1",
+    "logs": "link:logs",
+    "trpc-ui": "^1.0.15"
+  }
+}

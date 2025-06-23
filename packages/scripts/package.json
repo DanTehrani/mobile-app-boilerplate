@@ -1,0 +1,34 @@
+{
+  "name": "@raylac/scripts",
+  "scripts": {
+    "exec": "dotenv -e ../../.env -- tsx $1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-rekognition": "^3.812.0",
+    "@aws-sdk/client-s3": "^3.812.0",
+    "@google-cloud/vision": "^5.1.0",
+    "@noble/secp256k1": "^2.1.0",
+    "@boilerplate/db": "workspace:*",
+    "@trpc/client": "11.0.0-rc.439",
+    "@trpc/server": "11.0.0-rc.439",
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "elevenlabs": "^1.59.0",
+    "expo-server-sdk": "^3.15.0",
+    "firebase": "^11.7.3",
+    "nanoid": "^5.0.7",
+    "openai": "^4.98.0",
+    "play-sound": "^1.1.6",
+    "sharp": "^0.34.1",
+    "viem": "^2.17.0",
+    "ws": "^8.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@types/play-sound": "^1.1.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.5.2"
+  }
+}

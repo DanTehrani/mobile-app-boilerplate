@@ -1,0 +1,13 @@
+.eslintcache
+node_modules
+.env
+
+.DS_Store
+google-service-account.json
+google-service-account-firebase.json
+.turbo
+
+out/
+
+logs/
+

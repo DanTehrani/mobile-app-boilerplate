@@ -1,3 +1,5 @@
+// 3. React Native needs crypto.getRandomValues polyfill and sha512
+import 'react-native-get-random-values';
 import { StatusBar } from 'expo-status-bar';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,7 +13,6 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persister';
 import Toast from 'react-native-toast-message';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as Sentry from '@sentry/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
@@ -27,6 +28,7 @@ import Advanced from './screens/Advanced';
 import Home from './screens/Home';
 import * as Notifications from 'expo-notifications';
 import Welcome from './screens/Welcome';
+import EnableNotification from './screens/EnableNotification';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -139,6 +141,13 @@ const Screens = () => {
                   headerShown: false,
                 }}
               ></RootStack.Screen>
+              <RootStack.Screen
+                name="EnableNotification"
+                component={EnableNotification}
+                options={{
+                  title: 'Enable Notification',
+                }}
+              ></RootStack.Screen>
             </RootStack.Navigator>
           </BottomSheetModalProvider>
           <Toast></Toast>
@@ -221,4 +230,4 @@ const App = () => {
   );
 };
 
-export default Sentry.wrap(App);
+export default App;

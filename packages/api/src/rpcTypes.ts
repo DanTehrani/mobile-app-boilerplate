@@ -5,7 +5,6 @@ import { z } from 'zod';
  */
 export const registerExpoPushTokenRequestBodyType = z.object({
   token: z.string(),
-  userId: z.string(),
 });
 
 export type RegisterExpoPushTokenRequestBody = z.infer<
@@ -20,15 +19,8 @@ export type RegisterUserRequestBody = z.infer<
   typeof registerUserRequestBodyType
 >;
 
-export const getUserRequestBodyType = z.object({
-  userId: z.string(),
-});
-
-export type GetUserRequestBody = z.infer<typeof getUserRequestBodyType>;
-
 export const updateNotificationEnabledRequestBodyType = z.object({
   enabled: z.boolean(),
-  userId: z.string(),
 });
 
 export type UpdateNotificationEnabledRequestBody = z.infer<

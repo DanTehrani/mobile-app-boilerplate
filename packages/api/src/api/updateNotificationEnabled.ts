@@ -1,8 +1,9 @@
 import prisma from '../lib/prisma';
 import { UpdateNotificationEnabledRequestBody } from '../rpcTypes';
+import { AuthedRequestBody } from '../types';
 
 const updateNotificationEnabled = async (
-  input: UpdateNotificationEnabledRequestBody
+  input: AuthedRequestBody<UpdateNotificationEnabledRequestBody>
 ) => {
   await prisma.user.update({
     where: {

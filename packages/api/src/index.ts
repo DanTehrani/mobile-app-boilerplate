@@ -1,13 +1,17 @@
 import 'dotenv/config';
 import './lib/sentry';
-import { router, createCallerFactory, publicProcedure } from './trpc';
+import {
+  router,
+  createCallerFactory,
+  publicProcedure,
+  authedProcedure,
+} from './trpc';
 import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import { createContext } from './context';
 import {
   registerExpoPushTokenRequestBodyType,
   updateNotificationEnabledRequestBodyType,
   registerUserRequestBodyType,
-  getUserRequestBodyType,
 } from './rpcTypes';
 import registerExpoPushToken from './api/registerExpoPushToken';
 import updateNotificationEnabled from './api/updateNotificationEnabled';
@@ -21,11 +25,12 @@ BigInt.prototype.toJSON = function () {
 };
 
 export const appRouter = router({
-  registerExpoPushToken: publicProcedure
+  registerExpoPushToken: authedProcedure
     .input(registerExpoPushTokenRequestBodyType)
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       return await registerExpoPushToken({
         ...input,
+        userId: ctx.userId,
       });
     }),
 
@@ -37,19 +42,18 @@ export const appRouter = router({
       });
     }),
 
-  updateNotificationEnabled: publicProcedure
+  updateNotificationEnabled: authedProcedure
     .input(updateNotificationEnabledRequestBodyType)
-    .mutation(async ({ input }) => {
+    .mutation(async ({ ctx, input }) => {
       return await updateNotificationEnabled({
+        userId: ctx.userId,
         ...input,
       });
     }),
 
-  getUser: publicProcedure
-    .input(getUserRequestBodyType)
-    .query(async ({ input }) => {
-      return await getUser(input.userId);
-    }),
+  getUser: authedProcedure.query(async ({ ctx }) => {
+    return await getUser({ userId: ctx.userId });
+  }),
 });
 
 export const createCaller = createCallerFactory(appRouter);

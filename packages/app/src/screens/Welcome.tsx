@@ -1,10 +1,12 @@
 import StyledButton from '@/components/StyledButton';
 import StyledText from '@/components/StyledText';
 import useTypedNavigation from '@/hooks/useTypedNavigation';
+import { AUTH_TOKEN_KEY } from '@/lib/secureStorageKeys';
 import colors from '@/lib/styles/colors';
 import { trpc } from '@/lib/trpc';
 import { getUserId, setUserId } from '@/lib/utils';
 import queryKeys from '@/queryKeys/queryKeys';
+import * as SecureStore from 'expo-secure-store';
 import { useQueryClient } from '@tanstack/react-query';
 import { Alert, View } from 'react-native';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,14 +28,14 @@ const Welcome = () => {
     }
 
     const newUserId = uuidv4();
+    const { token } = await registerUser({ userId: newUserId });
 
     await setUserId(newUserId);
-
-    await registerUser({ userId: newUserId });
+    await SecureStore.setItemAsync(AUTH_TOKEN_KEY, token);
 
     await queryClient.invalidateQueries({ queryKey: queryKeys.userId });
 
-    navigation.navigate('Tabs');
+    navigation.navigate('EnableNotification');
   };
 
   return (

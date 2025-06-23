@@ -1,6 +1,6 @@
 import prisma from '../lib/prisma';
 
-const getNotificationStatus = async (userId: string) => {
+const getUser = async ({ userId }: { userId: string }) => {
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
@@ -14,4 +14,4 @@ const getNotificationStatus = async (userId: string) => {
   return user;
 };
 
-export default getNotificationStatus;
+export default getUser;

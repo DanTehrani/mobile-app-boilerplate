@@ -11,6 +11,7 @@ import * as Application from 'expo-application';
 import { clearAsyncStorage, clearSecureStorage } from '@/lib/utils';
 import StyledButton from '@/components/StyledButton';
 import { useQueryClient } from '@tanstack/react-query';
+import useTypedNavigation from '@/hooks/useTypedNavigation';
 
 const InfoItem = ({
   label,
@@ -57,11 +58,12 @@ const Advanced = () => {
   }, []);
 
   const queryClient = useQueryClient();
+  const navigation = useTypedNavigation();
 
-  const onClearAsyncStorage = async () => {
+  const onClearLocalStorage = async () => {
     Alert.alert(
-      'Clear Async Storage',
-      'Are you sure you want to clear Async Storage?',
+      'Clear Local Storage',
+      'This will clear all local data and reset the app to the initial state.',
       [
         {
           text: 'Cancel',
@@ -73,6 +75,8 @@ const Advanced = () => {
             await clearAsyncStorage();
             await clearSecureStorage();
             queryClient.invalidateQueries();
+
+            navigation.navigate('Welcome');
           },
         },
       ]
@@ -87,7 +91,7 @@ const Advanced = () => {
         justifyContent: 'space-between',
         paddingTop: 16,
         paddingHorizontal: 16,
-        paddingBottom: insets.bottom + 32,
+        paddingBottom: insets.bottom + 16,
       }}
     >
       <View
@@ -121,8 +125,8 @@ const Advanced = () => {
       </View>
       <View>
         <StyledButton
-          title="Clear Async Storage"
-          onPress={onClearAsyncStorage}
+          title="Clear Local Storage"
+          onPress={onClearLocalStorage}
           variant="outline"
         />
       </View>

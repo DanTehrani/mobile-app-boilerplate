@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/node';
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 import type { Context } from './context';
 import { ZodError } from 'zod';
 
@@ -56,3 +56,17 @@ const sentrifiedProcedure = t.procedure
   .use(responseTimeMiddleware);
 
 export const publicProcedure = sentrifiedProcedure;
+
+export const authedProcedure = sentrifiedProcedure.use(async opts => {
+  const { userId } = opts.ctx;
+
+  if (!userId) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+
+  return opts.next({
+    ctx: {
+      userId,
+    },
+  });
+});

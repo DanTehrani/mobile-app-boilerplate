@@ -12,8 +12,8 @@
   "scripts": {
     "build": "tsc -d",
     "db:generate": "pnpm exec prisma generate",
-    "migrate:dev": "pnpm exec prisma migrate dev",
-    "migrate:prod": "pnpm exec prisma migrate deploy"
+    "migrate:dev": "dotenv -e ../../.env -- pnpm exec prisma migrate dev",
+    "migrate:prod": "dotenv -e ../../.env -- pnpm exec prisma migrate deploy"
   },
   "keywords": [],
   "author": "",

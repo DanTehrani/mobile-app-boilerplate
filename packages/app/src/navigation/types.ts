@@ -8,4 +8,5 @@ export type RootStackParamsList = {
   Dev: undefined;
   Advanced: undefined;
   Welcome: undefined;
+  EnableNotification: undefined;
 };

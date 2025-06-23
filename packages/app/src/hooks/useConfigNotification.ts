@@ -4,7 +4,6 @@ import * as Device from 'expo-device';
 import { trpc } from '@/lib/trpc';
 import { useMutation } from '@tanstack/react-query';
 import Constants from 'expo-constants';
-import { getUserId } from '@/lib/utils';
 
 export const getExpoPushToken = async (): Promise<string | null> => {
   try {
@@ -66,19 +65,12 @@ const useConfigNotification = () => {
 
   return useMutation({
     mutationFn: async () => {
-      const userId = await getUserId();
-
-      if (!userId) {
-        return;
-      }
-
       const token = await registerForPushNotificationsAsync();
 
       if (token) {
         // Submit the notification token to the server
         await registerExpoPushToken({
           token,
-          userId,
         });
       }
     },

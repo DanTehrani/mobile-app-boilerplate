@@ -10,7 +10,7 @@ import * as SecureStore from 'expo-secure-store';
 export const trpc = createTRPCReact<AppRouter>();
 
 const EXPO_PUBLIC_RPC_URL =
-  process.env.EXPO_PUBLIC_RPC_URL || 'http://localhost:3000/trpc';
+  process.env.EXPO_PUBLIC_RPC_URL || 'http://localhost:3000';
 
 export const getRpcLinks = () => {
   return [

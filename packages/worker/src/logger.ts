@@ -17,8 +17,6 @@ if (useDatadog) {
   console.log('Sending logs to Datadog');
 }
 
-const logFileName = new Date().toISOString().replace('T', '-').split('.')[0];
-
 export const logger = winston.createLogger({
   level: process.env.LOG_LEVEL ?? 'info',
   format: useDatadog
@@ -33,21 +31,5 @@ export const logger = winston.createLogger({
         new winston.transports.Http(httpTransportOptions),
         new winston.transports.Console(),
       ]
-    : [
-        new winston.transports.Console(),
-
-        // File transport
-        new winston.transports.File({
-          filename: `logs/${logFileName}-app.log`,
-          level: 'info', // Minimum logging level for this transport,
-          format: winston.format.json(),
-        }),
-
-        // Error log file
-        new winston.transports.File({
-          filename: `logs/${logFileName}-error.log`,
-          level: 'error', // Log only errors in this file
-          format: winston.format.json(),
-        }),
-      ],
+    : [new winston.transports.Console()],
 });

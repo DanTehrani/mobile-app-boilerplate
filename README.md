@@ -1,5 +1,10 @@
 # Expo App Boilerplate
 
+Boilerplate to ship mobile apps fast.
+
+DM https://x.com/dan_tehrani for questions and feedback.
+
+
 ## ✅ Out of the box
 
 - Push Notifications
@@ -12,10 +17,14 @@
 - End-to-end type safety (tRPC + Prisma)
 - In-app purchases (coming soon)
 
+So you can focus on your core features.
+
 ## 📙 Tutorial
 
 - [Part 1: Basic setup](https://raylac.notion.site/Build-react-native-apps-as-fast-as-possible-Part-1-21b8a1e8bd748040b17ac06eb4fc9224)
 - Part 2: Build a ChatGPT clone (coming soon)
+- Part 3: Set up in-app purchases (coming soon)
+- Part 4: Send push notifications for better retention (coming soon)
 
 ## Structure
 

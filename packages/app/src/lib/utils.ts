@@ -17,16 +17,6 @@ export const hapticOptions = {
   ignoreAndroidSystemSettings: false,
 };
 
-/*
-export const compressImage = async (uri: string) => {
-  const result = await Image.compress(uri, {
-    quality: 0.1,
-  });
-
-  return result;
-};
-*/
-
 export const triggerHapticFeedback = () => {
   if (Platform.OS === 'ios') {
     ReactNativeHapticFeedback.trigger('longPress', hapticOptions);

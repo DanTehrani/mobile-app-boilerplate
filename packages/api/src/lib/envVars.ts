@@ -11,5 +11,4 @@ const getEnvVar = <T>(key: string): T => {
   return value as T;
 };
 
-export const OPENAI_API_KEY = getEnvVar<string>('OPENAI_API_KEY');
 export const JWT_SECRET = getEnvVar<string>('JWT_SECRET');

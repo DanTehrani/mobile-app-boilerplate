@@ -2,7 +2,7 @@
 
 Boilerplate to ship mobile apps fast.
 
-DM https://x.com/dan_tehrani for questions and feedback.
+Contact me at x.com/dan_tehrani for a quote on building your MVP.
 
 
 ## ✅ Out of the box
